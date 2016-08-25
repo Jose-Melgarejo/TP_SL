@@ -1,0 +1,1 @@
+Aca pueden ir diagramas de caso de uso, tabla de eventos, historia, etc.
