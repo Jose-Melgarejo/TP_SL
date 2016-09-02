@@ -1,0 +1,18 @@
+integrantes de la reunion:
+	Javier Vescio
+	Jose Melgarejo
+	Agustin Padron
+	Cristian Juarez
+
+Temas de la Reunion:
+ Debate sobre la eleccion d tipo de juego:
+	Nos pusimos de acuerdo en el tipo de juego que vamos a crear.
+	Elejimos el tema que  propuso javier ya que es un tema interesante para desarrollar
+	basado en fragmentos históricos de la guerra de Malvinas acontecida de abril a junio de 1982  
+	En principio planteamos 3 a 4 niveles pero basandonos en los consejos del profesor en clase y
+	desidimos empezar con un nivel.La del 25 de mayo.
+	Javier se comprometio a desarrollar la historia del juego.
+	
+Eleccion de la version de Python y Pygame:
+	decidimos usa la version 2.7 de python ya que suponemos que es la que mas documentacion tiene y la 
+	la version 1.9.1 de pygame, que es la version compatible

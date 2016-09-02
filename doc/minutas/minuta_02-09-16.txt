@@ -1,0 +1,15 @@
+integrantes de la reunion:
+	Javier Vescio
+	Jose Melgarejo
+	Agustin Padron
+	Cristian Juarez
+
+Temas de la Reunion:
+	El equipo quedo de acuerdo en cuanto a la dinamica que tendra el juego
+		* si el avión vuela por encima de cierta altura, será alcanzado por un misil
+		* definimos que el jugador contará con 4 aviones en la misión 
+		* el objetivo será dejar fuera de combate a las dos embarcaciones
+	Posiboles clases para el proyecto
+		*Se hablo sobre las clases principales que podria llegar a tener el proyecto
+		*La Funcion que tendra cada clase
+		Dicho modelo inicial se adjunta en la carpeta APP
