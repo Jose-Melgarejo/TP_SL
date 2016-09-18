@@ -12,6 +12,8 @@ class Text:
     
     def run(self):
         flag = True
+        if Options.sound == True:
+            self.soud_select.play()
         while flag:
             self.screen.blit(load_image("background"), self.screen.get_rect())
             colour =  WHITE
