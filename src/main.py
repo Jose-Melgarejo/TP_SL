@@ -6,6 +6,7 @@ from globals import *
 from menu import Menu
 from text import Text
 from option import Option
+from tool import load_file, str_to_bool
 def main():
     #esto es para centrar la pantalla
     os.environ['SDL_VIDEO_CENTERED'] = "1"
@@ -16,6 +17,16 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_icon(tool.load_image("skyhaw"))
     pygame.display.set_caption(NAME)
+    f = load_file("options")
+    c = 0
+    for value in f:
+        c+=1
+        if c == 1:
+            Options.music = str_to_bool(value)
+        if  c == 2:
+            Options.sound = str_to_bool(value)
+        if  c == 3:
+            Options.playername = value      
     tool.load_music("music")
     #aca se controla con un if las  opciones de musica on/off
     if Options.music == True:
@@ -41,8 +52,7 @@ def main():
             Text(screen,"credit").run()      
         elif main_selection == 6:
             #salir
-            pygame.QUIT()
-            sys.exit()
+            return
         pygame.display.update()
 
 if __name__ == '__main__':

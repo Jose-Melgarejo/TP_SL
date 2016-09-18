@@ -25,3 +25,9 @@ def load_file(name):
         i = i.replace("\n", "")
         array_file.append(i)
     return array_file
+def str_to_bool(text):
+    ltext = text.lower().strip()
+    if ltext in ("on", "true", "yes"):
+        return True
+    else:
+        return False
