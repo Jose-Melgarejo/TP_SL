@@ -2,11 +2,15 @@ import pygame
 import tool
 import os
 import sys
+
 from globals import *
+from sea import *
 from menu import Menu
 from text import Text
+from game import *
 from option import Option
 from tool import load_file, str_to_bool
+from main2 import main_loop
 def main():
     #esto es para centrar la pantalla
     os.environ['SDL_VIDEO_CENTERED'] = "1"
@@ -32,11 +36,13 @@ def main():
     if Options.music == True:
         pygame.mixer.music.play(-1)
     main_selection = 0
+    Sea.global_sea = Sea()
     while True:
         main_selection = Menu(screen, ("Jugar", "Historia","Mejores Puntos", "Opciones", "Ayuda","Creditos","Salir"), main_selection).run()
         if main_selection == 0:
-            pass
-            #cuando tengamos el modulo de game o arena esta tiene que ir aca... ejemplo game.run()
+            screen = pygame.display.set_mode((800, 180))
+            gamee = main_loop()            #cuando tengamos el modulo de game o arena esta tiene que ir aca... ejemplo game.run()
+            
         elif main_selection == 1: 
             Text(screen,"history").run()
             #Historia
