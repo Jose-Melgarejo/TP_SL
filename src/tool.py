@@ -1,4 +1,5 @@
 import pygame
+import codecs
 from globals import *
 
 pygame.font.init()
@@ -25,9 +26,36 @@ def load_file(name):
         i = i.replace("\n", "")
         array_file.append(i)
     return array_file
+
+
 def str_to_bool(text):
     ltext = text.lower().strip()
     if ltext in ("on", "true", "yes"):
         return True
     else:
         return False
+    
+def write_scores(scores):
+    try:
+        f = codecs.open("data/file/higscore.txt", "w", "utf_8")
+        for i in xrange(10):
+            print >> f,scores[i][0]
+            print >> f,scores[i][1]
+    except:
+        print "Error al cargar mejores puntos" 
+        return
+
+def read_scores(difficult):
+    score = []
+    f = codecs.open("data/file/higscore"+str(difficult)+".txt", "r", "utf_8")
+    i = 0
+    name, point = "", 0
+    for line in f:
+        if i % 2 == 0:
+            name = line.strip()
+        else:
+            point = int(line)
+        score.append((name, point))
+        i += 1
+    return score
+
