@@ -81,7 +81,7 @@ def main_loop(dificultad):
                 elif event.key == pygame.K_RIGHT:
                     avion.soltarBomba()
                     puntuacion -= 10;
-                elif event.key == pygame.K_q:
+                elif event.key == pygame.K_ESCAPE:
                     salir_del_juego = True
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
