@@ -55,7 +55,7 @@ def read_scores(difficult):
             name = line.strip()
         else:
             point = int(line)
-        score.append((name, point))
+            score.append((name, point))
         
         i += 1
     return score

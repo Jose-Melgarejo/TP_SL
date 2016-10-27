@@ -17,8 +17,9 @@ class Scores:
         while flag:
             self.screen.blit(load_image("background"), self.screen.get_rect())
             colour =  WHITE
-            for i in range(len(self.scores)):
-                title = self.scores[i][0]+" "+str(self.scores[i][1])
+            for i in xrange(5):
+                scor = self.scores[i]
+                title =scor[0]+" "+str(scor[1])
                 image = smallfont.render(title,True,colour)
                 rect = image.get_rect()
                 rect.centerx = self.screen.get_rect().centerx
