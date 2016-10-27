@@ -55,8 +55,9 @@ def main():
             #mostrar mejores puntos de esa dificultad
             print "puntos: "
             print puntos
-            Text(screen,"highscore").run()
             screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+            Scores(screen,dificultad).run()
+            
         elif main_selection == 1: 
             Text(screen,"history").run()
             #Historia
