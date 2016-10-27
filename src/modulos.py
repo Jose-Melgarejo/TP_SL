@@ -22,7 +22,7 @@ class Avion(pygame.sprite.Sprite):
 
     def configurarModoAtaque(self):
         if not (self.estrellarse):
-            self.rect.y = 52
+            self.rect.y = 82
             self.modo_ataque = True;
 
     def subir(self):
@@ -49,7 +49,7 @@ class Avion(pygame.sprite.Sprite):
             self.rect.y += (self.bloque * 0.1);
             self.rect.x -= (self.bloque * 0.05);
             self.image = pygame.transform.rotate(self.image, -0.1)
-            if (self.rect.y > 180):
+            if (self.rect.y > 200):
                 self.kill();
 
 class Bomba(pygame.sprite.Sprite):
@@ -70,7 +70,7 @@ class Bomba(pygame.sprite.Sprite):
         self.rect.y += (self.bloque * self.velocidad_caida);
         self.rect.x -= (self.bloque * 0.01);
         self.velocidad_caida *= 1.05
-        if (self.rect.y > 180):
+        if (self.rect.y > 200):
             self.kill();        
 
 class Embarcacion(pygame.sprite.Sprite):
@@ -78,9 +78,9 @@ class Embarcacion(pygame.sprite.Sprite):
         # Llama al constructor de la clase padre (Sprite)
         pygame.sprite.Sprite.__init__(self)
         
-        self.image = pygame.image.load('imagenes/coventry.gif');
+        self.image = pygame.image.load('imagenes/coventry_c.png');
         self.rect = self.image.get_rect();
-        self.rect.height = self.rect.height * .1
+        #self.rect.height = self.rect.height * .1
         self.rect.x = p_posx;
         self.rect.y = p_posy;
         self.bloque = p_bloque;
@@ -125,6 +125,9 @@ class ManagerProyectiles():
             proyectil = Proyectil(self.posx,aux,self.bloque)
             self.lista_proyectiles.add(proyectil)
 
+    def destruirProyectiles(self):
+        self.lista_proyectiles.empty()
+
     #def update(self):
     #    for proyectil in lista_proyectiles:
             
@@ -145,6 +148,8 @@ class Proyectil(pygame.sprite.Sprite):
         self.rect.x -= self.bloque;
         if (self.rect.x < 0):
             self.kill();
+
+    
 
     
         

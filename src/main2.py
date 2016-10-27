@@ -3,7 +3,7 @@ from modulos import *
 pygame.init();
 
 #RESOLUCION Y TITULO DE VENTANA
-width_s, height_s = 800, 180;
+width_s, height_s = 800, 200;
 pantalla = pygame.display.set_mode((width_s,height_s)); #Sets resolution
 pygame.display.set_caption('1982'); #Sets game's name.
 ###############################
@@ -14,24 +14,27 @@ lista_embarcacion = pygame.sprite.Group();
 lista_oceano = pygame.sprite.Group();
 lista_avion = pygame.sprite.Group();
 ###############################
+nubeImg = pygame.image.load('data/image/cloud.png')
 
 def updateAndDrawFromList(lista):
     lista.update();
     lista.draw(pantalla);   
 
 def definirDificultad(valor):
-    if (valor <= 0): return 14,25; #CADETE 
+    if (valor <= 0): return 14,25; #CADETE
     if (valor == 1): return 22,20; #CAPITAN
     if (valor >= 2): return 25,18; #HALCON
 
 def blitImg(img,x,y):
     pantalla.blit(img,(x,y));
-
-def main_loop():
+    
+def main_loop(dificultad):
+    fps,lead = definirDificultad(dificultad);
+    
     #DEFINIMOS LOS OBJETOS PRINCIPALES
-    avion = Avion(75,102,50,1000);
+    avion = Avion(75,132,50,1000);
     oceano = Oceano(0,height_s-27,lead/2);
-    managerProyectiles = ManagerProyectiles(width_s,110,lead+30);
+    managerProyectiles = ManagerProyectiles(width_s,140,lead+30);
     ###############################
 
     lista_oceano.add(oceano)
@@ -45,10 +48,24 @@ def main_loop():
     soporte_maximo_disparos = 10;
     duracion_paz = 3;
     duracion_hostilidad = 15;
-    ###############################
+    tiempo_al_momento_del_derribo = -1
+    barco_impactado = False;
+    puntuacion = 100;
+
+    pos_x_nube = 800;
+    pos_x_nube2 = 400;
+
 
     while not salir_del_juego:
         pantalla.fill((255,255,255)); #Pintamos de blanco toda la pantalla
+        blitImg(nubeImg,pos_x_nube,30)
+        blitImg(nubeImg,pos_x_nube2,20)
+        pos_x_nube -= lead - 10
+        pos_x_nube2 -= lead - 10
+        if (pos_x_nube < -100):
+            pos_x_nube = 800;
+        if (pos_x_nube2 < -100):
+            pos_x_nube2 = 800;
         
         if (contador == fps):
             contador = 0;
@@ -57,13 +74,15 @@ def main_loop():
             contador += 1
         for event in pygame.event.get():
             if (event.type == pygame.QUIT):
-                salir_del_juego = 1
+                salir_del_juego = True
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     avion.subir()
-                if event.key == pygame.K_RIGHT:
-                    print "key_right"
-                    avion.soltarBomba()                    
+                elif event.key == pygame.K_RIGHT:
+                    avion.soltarBomba()
+                    puntuacion -= 10;
+                elif event.key == pygame.K_q:
+                    salir_del_juego = True
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
                     avion.bajar()
@@ -75,11 +94,13 @@ def main_loop():
             managerProyectiles.atacar = True;
         elif (segundos_que_pasaron == tiempo_critico and contador == 10):
             managerProyectiles.atacar = False;
-        elif (segundos_que_pasaron == tiempo_critico + 1 and contador == 0):
-            avion.configurarModoAtaque()
         elif (segundos_que_pasaron == tiempo_critico + 3 and contador == 0):
-            embarcacion = Embarcacion(width_s,height_s-27-55,lead+30,1000); #original
+            avion.configurarModoAtaque()
+        elif (segundos_que_pasaron == tiempo_critico + 5 and contador == 0):
+            embarcacion = Embarcacion(width_s,height_s-27-40,lead+30,1000); #original
             lista_embarcacion.add(embarcacion);
+        elif (segundos_que_pasaron == tiempo_critico + 10 and contador == 0):
+            salir_del_juego = True;
         ###############################
 
         #LOS INGLESES REALIZAN DISPAROS Y SE CHEQUEA SI ALGUNO IMPACTA EN EL AVION ARGENTINO
@@ -89,17 +110,26 @@ def main_loop():
         lista_impactos = pygame.sprite.spritecollide(avion, managerProyectiles.lista_proyectiles, True)
         impactos_recibidos += len(lista_impactos);
 
+        #if (segundos_que_pasaron == tiempo_al_momento_del_derribo + 4):
+            #salir_del_juego = True;
+
         if (impactos_recibidos == soporte_maximo_disparos):
             avion.estrellar();
             managerProyectiles.atacar = False;
+            tiempo_al_momento_del_derribo = segundos_que_pasaron;
+            puntuacion = 0;
 
         if (impactos_recibidos > aux):
             aux = impactos_recibidos
 
-        if avion.bomba_avion is not None:
-            list_barco_impacto = pygame.sprite.spritecollide(avion.bomba_avion, lista_embarcacion, True)
+        if not avion.bomba_avion == None:
+            list_barco_impacto = pygame.sprite.spritecollide(avion.bomba_avion, lista_embarcacion, False)
             if (len(list_barco_impacto) == 1):
                 print "The Ship was hit!"
+                barco_impactado = True;
+                avion.bomba_avion.kill();
+                avion.bomba_avion = None;
+                puntuacion += 110
                 
         ###############################
 
@@ -113,11 +143,12 @@ def main_loop():
         
         pygame.display.update();
         clock.tick(fps);
+
+        if (salir_del_juego):
+            puntuacion = puntuacion - (10 * impactos_recibidos)
+            avion.kill();
+            managerProyectiles.destruirProyectiles()
         
-    pygame.quit()
-    quit()
-
-#DEFINIMOS LA DIFICULTAD (0=Normal 1=Dificil 2=Supervivencia)
-fps,lead = definirDificultad(1);
-
-#INICIAMOS EL JUEGO
+    return puntuacion;
+    #pygame.quit()
+    #quit()

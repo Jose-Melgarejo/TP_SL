@@ -37,12 +37,18 @@ def main():
         pygame.mixer.music.play(-1)
     main_selection = 0
     Sea.global_sea = Sea()
-    while True:
+    while not main_selection == 6:
         main_selection = Menu(screen, ("Jugar", "Historia","Mejores Puntos", "Opciones", "Ayuda","Creditos","Salir"), main_selection).run()
         if main_selection == 0:
-            screen = pygame.display.set_mode((800, 180))
-            gamee = main_loop()            #cuando tengamos el modulo de game o arena esta tiene que ir aca... ejemplo game.run()
-            
+            screen = pygame.display.set_mode((800, 200))
+
+            #############Pongo a la fuerza un nivel de dificultad
+            dificultad = 0; #va de 0 a 2
+            puntos = main_loop(dificultad)   #cuando tengamos el modulo de game o arena esta tiene que ir aca... ejemplo game.run()
+
+            print "puntos: "
+            print puntos
+            screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         elif main_selection == 1: 
             Text(screen,"history").run()
             #Historia
@@ -55,11 +61,9 @@ def main():
         elif main_selection == 4: 
             Text(screen,"help").run()  
         elif main_selection == 5: 
-            Text(screen,"credit").run()      
-        elif main_selection == 6:
-            #salir
-            return
+            Text(screen,"credit").run()
         pygame.display.update()
-
+    pygame.quit()
+    sys.exit()
 if __name__ == '__main__':
     main()
