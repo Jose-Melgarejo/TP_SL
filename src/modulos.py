@@ -11,7 +11,7 @@ class Avion(pygame.sprite.Sprite):
         # Llama al constructor de la clase padre (Sprite)
         pygame.sprite.Sprite.__init__(self)
         
-        self.image = pygame.image.load('imagenes/skyhawkb.gif');
+        self.image = pygame.image.load('data/image/skyhawkb.gif');
         self.rect = self.image.get_rect();
         self.rect.width = self.rect.width * .9
         self.rect.x = p_posx;
@@ -59,7 +59,7 @@ class Bomba(pygame.sprite.Sprite):
         # Llama al constructor de la clase padre (Sprite)
         pygame.sprite.Sprite.__init__(self)
         
-        self.image = pygame.image.load('imagenes/a4_bomb.png');
+        self.image = pygame.image.load('data/image/a4_bomb.png');
         self.rect = self.image.get_rect();
         self.rect.height = self.rect.height * .005
         self.rect.x = p_posx;
@@ -78,7 +78,7 @@ class Embarcacion(pygame.sprite.Sprite):
         # Llama al constructor de la clase padre (Sprite)
         pygame.sprite.Sprite.__init__(self)
         
-        self.image = pygame.image.load('imagenes/coventry_c.png');
+        self.image = pygame.image.load('data/image/coventry_c.png');
         self.rect = self.image.get_rect();
         #self.rect.height = self.rect.height * .1
         self.rect.x = p_posx;
@@ -96,7 +96,7 @@ class Oceano(pygame.sprite.Sprite):
         # Llama al constructor de la clase padre (Sprite)
         pygame.sprite.Sprite.__init__(self)
         
-        self.image = pygame.image.load('imagenes/ocean.png');
+        self.image = pygame.image.load('data/image/ocean.png');
         self.rect = self.image.get_rect();
         self.rect.x = p_posx;
         self.rect.y = p_posy;
@@ -137,7 +137,7 @@ class Proyectil(pygame.sprite.Sprite):
         # Llama al constructor de la clase padre (Sprite)
         pygame.sprite.Sprite.__init__(self)
         
-        self.image = pygame.image.load('imagenes/municion_naval.png');
+        self.image = pygame.image.load('data/image/municion_naval.png');
         self.rect = self.image.get_rect();
         self.rect.width = self.rect.width * .9
         self.rect.x = p_posx;

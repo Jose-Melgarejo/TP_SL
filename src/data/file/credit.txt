@@ -1,3 +1,10 @@
-creditos
-no escribir lineas muy largas
-para que entre en pantalla
+DESARROLLADORES:
+Agustin Padron
+Cristian Juarez
+Javier Vescio
+Jose Melgarejo
+
+Seminario de Lenguajes
+Universidad Nacional de Lanus
+Año 2016
+

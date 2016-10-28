@@ -1,4 +1,11 @@
-ayuda
-aca se pondria el modo de juego,
-los comandos,
-los tips, etc
+SUBIR: 
+Mantener flecha arriba
+
+BAJAR:
+Soltar flecha arriba
+
+LANZAR BOMBA*:
+Presionar una vez flecha derecha
+
+*Disponible en aproximacion final a la 
+embarcacion enemiga

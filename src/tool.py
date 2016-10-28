@@ -46,10 +46,20 @@ def str_to_bool(text):
     else:
         return False
     
-def write_scores(scores):
+"""def write_scores(scores):
     try:
         f = codecs.open("data/file/higscore.txt", "w", "utf_8")
-        for i in xrange(10):
+        for i in xrange(5):
+            print >> f,scores[i][0]
+            print >> f,scores[i][1]
+    except:
+        print "Error al cargar mejores puntos" 
+        return"""
+
+def write_scores(scores,difficult):
+    try:
+        f = codecs.open("data/file/higscore"+str(difficult)+".txt", "w", "utf_8")
+        for i in xrange(5):
             print >> f,scores[i][0]
             print >> f,scores[i][1]
             f.close()
@@ -68,7 +78,32 @@ def read_scores(difficult):
         else:
             point = int(line)
             score.append((name, point))
-        
         i += 1
-    return score
+
+    size_of_list = len(score);
+    ordered_score = []
+    
+    for i in range(0,size_of_list):
+        ordered_score.append(get_min_value(score));
+
+    ordered_score.reverse();
+    return ordered_score;
+
+def get_min_value(scores):
+    output = ();
+    min_score = 0;
+    min_index = -1;
+    i = 0;
+    for element in scores:
+        if (i == 0):
+            min_score = element[1];
+            min_index = 0;
+        else:
+            if (element[1] < min_score):
+                min_score = element[1];
+                min_index = i;
+        i+=1;
+    output = scores[min_index]
+    scores.remove(output);
+    return output;
 

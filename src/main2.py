@@ -73,16 +73,15 @@ def main_loop(dificultad):
         else:
             contador += 1
         for event in pygame.event.get():
-            if (event.type == pygame.QUIT):
-                salir_del_juego = True
-            elif event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     avion.subir()
                 elif event.key == pygame.K_RIGHT:
                     avion.soltarBomba()
                     puntuacion -= 10;
-                elif event.key == pygame.K_q:
+                elif event.key == pygame.K_ESCAPE:
                     salir_del_juego = True
+                    puntuacion = 0;
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
                     avion.bajar()
@@ -146,6 +145,8 @@ def main_loop(dificultad):
 
         if (salir_del_juego):
             puntuacion = puntuacion - (10 * impactos_recibidos)
+            if (puntuacion < 0):
+                puntuacion = 0;
             avion.kill();
             managerProyectiles.destruirProyectiles()
         

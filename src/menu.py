@@ -16,7 +16,7 @@ class Menu:
     def run(self):
         done = True
         while done:
-            self.screen.blit(load_image("background"), self.screen.get_rect())
+            self.screen.blit(load_image("bg_image4"), self.screen.get_rect())
             for i in range(len(self.menu)):
                 self.render(i)
             
@@ -59,9 +59,9 @@ class Menu:
             self.selection = 0
 
     def render(self, i):
-        colour =  GRIS
+        colour =  BLACK
         if self.selection == i:
-            colour = RED
+            colour = WHITE
         title = self.menu[i]
         image = font.render(title,True,colour)
         rect = image.get_rect()
