@@ -3,7 +3,7 @@ import codecs
 from globals import *
 
 pygame.font.init()
-font = pygame.font.Font("data/font/myfont.ttf", 70)
+font = pygame.font.Font("data/font/myfont.ttf", 40)
 smallfont = pygame.font.Font("data/font/text.ttf", 30)
 
 def load_image(name):
@@ -26,8 +26,19 @@ def load_file(name):
         i = i.replace("\n", "")
         array_file.append(i)
     return array_file
-
-
+def update_option():
+    file = open("data/file/options.txt","w")
+    array_file = []
+    if Options.music==True :
+        print>>file,"true"
+    else:
+        print>>file,"false"
+    if Options.sound==True :
+        print>>file,"true"
+    else:
+        print>>file,"false"
+    print>>file,Options.playername   
+    file.close()
 def str_to_bool(text):
     ltext = text.lower().strip()
     if ltext in ("on", "true", "yes"):
@@ -41,6 +52,7 @@ def write_scores(scores):
         for i in xrange(10):
             print >> f,scores[i][0]
             print >> f,scores[i][1]
+            f.close()
     except:
         print "Error al cargar mejores puntos" 
         return
