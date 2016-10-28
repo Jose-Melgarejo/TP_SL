@@ -8,8 +8,35 @@ class Scores:
         self.scores = read_scores(difficult)
         if not self.logo:
             self.logo = load_image("logo")
-        self.soud_select = load_sound("select")   
-    
+        self.soud_select = load_sound("select")
+
+    def loadNewScore(self,name,score,difficult):
+        max_score = 0;
+        min_score = 0;
+        min_index = -1;
+        self.scores = read_scores(difficult)
+        i = 0;
+        for element in self.scores:
+            if (i == 0):
+                max_score = element[1];
+                min_score = element[1];
+            else:
+                if (element[1] > max_score):
+                    max_score = element[1];
+                if (element[1] < min_score):
+                    min_score = element[1];
+                    min_index = i;
+            i+=1;
+                    
+        if (score > min_score):
+            self.scores.append((name,score));
+            del self.scores[min_index];
+            write_scores(self.scores,difficult);
+            self.scores = read_scores(difficult);
+            return self.scores, True;
+        else:
+            return None, False;
+
     def run(self):
         flag = True
         if Options.sound == True:

@@ -61,7 +61,7 @@ class Menu:
     def render(self, i):
         colour =  BLACK
         if self.selection == i:
-            colour = GRIS
+            colour = WHITE
         title = self.menu[i]
         image = font.render(title,True,colour)
         rect = image.get_rect()
